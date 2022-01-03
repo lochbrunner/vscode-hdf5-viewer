@@ -1,0 +1,44 @@
+POST http://localhost:3000/api HTTP/1.1
+content-type: application/json
+
+{
+    "command": "list",
+    "key": "/"
+}
+
+
+###
+
+
+
+POST http://localhost:3000/api HTTP/1.1
+content-type: application/json
+
+{
+    "command": "attributes",
+    "key": "group/subgroup"
+}
+
+
+###
+
+
+POST http://localhost:3000/api HTTP/1.1
+content-type: application/json
+
+{
+    "command": "list",
+    "key": "group"
+}
+
+###
+
+
+POST http://localhost:3000/api HTTP/1.1
+content-type: application/json
+
+{
+    "command": "list",
+    "key": "group/subgroup"
+}
+

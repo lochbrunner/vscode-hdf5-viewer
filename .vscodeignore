@@ -1,0 +1,13 @@
+.vscode/**
+assets/**
+corejs/**
+src/**
+mockup/**
+test/**
+node_modules/**
+*.log
+*webpack*
+**/*.svg
+**/*.map
+**/*.d.ts
+tsconfig.json
