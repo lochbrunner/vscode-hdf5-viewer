@@ -7,7 +7,7 @@
     "description": "Displays HDF5 files in VS code",
     "scripts": {
         "build-client": "rm -f dist/client/* && webpack --config ./webpack.config.client.js --mode=development",
-        "start": "webpack-dev-server --config ./webpack.config.client.js --mode development --hot --progress --color --port 3003",
+        "start": "webpack-dev-server --config ./webpack.config.client.js --mode=development --hot --progress --color --port 3003",
         "build-extension": "rm -f dist/extension/* && webpack --devtool nosources-source-map --config ./node-extension.webpack.config.js"
     },
     "keywords": [
@@ -84,9 +84,14 @@
         "yargs": "^17.3.1"
     },
     "dependencies": {
+        "@emotion/react": "^11.7.1",
+        "@emotion/styled": "^11.6.0",
+        "@mui/icons-material": "^5.2.5",
+        "@mui/material": "^5.2.7",
         "classnames": "^2.3.1",
         "electron-build-env": "^0.2.0",
         "jsfive": "^0.3.5",
+        "material-ui-icons": "^1.0.0-beta.36",
         "react": "^17.0.2",
         "react-dom": "^17.0.2"
     }

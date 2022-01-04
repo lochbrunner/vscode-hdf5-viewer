@@ -1,0 +1,28 @@
+.group {
+    li {
+        margin: -7px;
+    }
+    .load-button {
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    .collapse-button {
+        cursor: pointer;
+    }
+
+    .open-button {
+        cursor: pointer;
+    }
+
+    ul {
+        margin: 0;
+        padding-left: 25px;
+        list-style-type: none;
+    }
+
+    span {
+        position: absolute;
+        margin-top: 2px;
+    }
+}

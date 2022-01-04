@@ -1,42 +1,9 @@
 const ReactDOM = require('react-dom');
-import React, { useState } from 'react';
+import React from 'react';
 
-import { Client, Item } from './requester';
+import { Client } from './requester';
+import { Group } from './group';
 
-
-interface GroupProps {
-    client: Client;
-    root: string;
-}
-
-function Group(props: GroupProps) {
-    const [items, changeItems] = useState<Item[] | null>(null);
-    if (!items) {
-        props.client.list(props.root).then(changeItems);
-        return (
-            <p>Loading ...</p>
-        );
-    }
-    else {
-        const tree = items.map((data, i) => {
-            if (data.isGroup) {
-                return (
-                    <li key={i}>
-                        <span>{data.name}</span>
-                        <Group client={props.client} root={data.path} />
-                    </li>
-                );
-            } else {
-                return <li key={i}>{data.name}</li>;
-            }
-        })
-        return (
-            <ul>
-                {tree}
-            </ul>
-        );
-    }
-}
 
 interface Props {
     client: Client;
@@ -45,8 +12,7 @@ interface Props {
 function Page(props: Props) {
     return (
         <div>
-            <p>Items</p>
-            <Group root="/" client={props.client} />
+            <Group root="/" client={props.client} name="root" />
         </div>
     );
 }
