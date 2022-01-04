@@ -2,11 +2,11 @@
     "name": "vscode-hdf5-viewer",
     "version": "0.0.1",
     "engines": {
-        "vscode": "^1.51.0"
+        "vscode": "^1.63.1"
     },
     "description": "Displays HDF5 files in VS code",
     "scripts": {
-        "build-client": "rm -f dist/client/* && webpack --config ./webpack.config.client.js --mode=development",
+        "build-client": "rm -f dist/client/* && webpack --config ./webpack.config.client.js --mode=production",
         "start": "webpack-dev-server --config ./webpack.config.client.js --mode=development --hot --progress --color --port 3003",
         "build-extension": "rm -f dist/extension/* && webpack --devtool nosources-source-map --config ./node-extension.webpack.config.js"
     },
@@ -18,23 +18,23 @@
     "publisher": "lochbrunner",
     "license": "MIT",
     "repository": {
-        "url": "https://github.com/lochbrunner/react-hdf5-viewer.git"
+        "url": "https://github.com/lochbrunner/vscode-hdf5-viewer.git"
     },
     "main": "./dist/extension/extension.js",
     "activationEvents": [
-        "onCommand:react-hdf5-viewer.openCurrentFile"
+        "onCommand:vscode-hdf5-viewer.openCurrentFile"
     ],
     "contributes": {
         "commands": [
             {
-                "command": "react-hdf5-viewer.openCurrentFile",
+                "command": "vscode-hdf5-viewer.openCurrentFile",
                 "title": "Hdf5 Viewer"
             }
         ],
         "menus": {
             "explorer/context": [
                 {
-                    "command": "react-hdf5-viewer.openCurrentFile"
+                    "command": "vscode-hdf5-viewer.openCurrentFile"
                 }
             ]
         },
@@ -46,6 +46,7 @@
         "@babel/core": "^7.16.7",
         "@pmmmwh/react-refresh-webpack-plugin": "^0.5.4",
         "@types/classnames": "^2.3.1",
+        "@types/mustache": "^4.1.2",
         "@types/node": "^17.0.7",
         "@types/react": "^17.0.38",
         "@types/react-dom": "^17.0.11",

@@ -1,6 +1,12 @@
 # HDF5 Viewer Extension for VS-Code
 
-## Build
+## Usage
+
+Right click on the file and click on `Hdf5 Viewer` to display the file. 
+
+## Contributing
+
+### Build
 
 
 ```bash

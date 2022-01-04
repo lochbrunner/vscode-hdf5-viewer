@@ -1,9 +1,9 @@
 .vscode/**
 assets/**
-corejs/**
 src/**
-mockup/**
 test/**
+test_data/**
+tools/**
 node_modules/**
 *.log
 *webpack*
