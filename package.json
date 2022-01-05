@@ -1,7 +1,7 @@
 {
     "name": "vscode-hdf5-viewer",
     "displayName": "HDF5 Preview",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "engines": {
         "vscode": "^1.63.1"
     },
@@ -23,7 +23,8 @@
     },
     "main": "./dist/extension/extension.js",
     "activationEvents": [
-        "onCommand:vscode-hdf5-viewer.openCurrentFile"
+        "onCommand:vscode-hdf5-viewer.openCurrentFile",
+        "onCustomEditor:vscode-hdf5-viewer.preview"
     ],
     "contributes": {
         "commands": [
@@ -44,8 +45,8 @@
         },
         "customEditors": [
             {
-                "viewType": "linuxBinaryPreview.preview",
-                "displayName": "Linux Binary Preview",
+                "viewType": "vscode-hdf5-viewer.preview",
+                "displayName": "HDF5 Preview",
                 "selector": [
                     {
                         "filenamePattern": "*.hdf"
