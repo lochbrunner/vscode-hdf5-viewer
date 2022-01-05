@@ -8,12 +8,13 @@ const hdf5 = require('jsfive');
 
 function list(object: any) {
 	const items = object.keys.map((name: string) => {
-		const isGroup = typeof object.get(name).keys !== 'function';
-		const path = object.get(name).name;
+		const item = object.get(name);
+		const isGroup = typeof item.keys !== 'function';
 		return ({
 			name,
 			isGroup,
-			path
+			path: item.name,
+			attributes: item.attrs
 		});
 	});
 	return items;

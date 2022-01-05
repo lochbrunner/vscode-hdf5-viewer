@@ -4,15 +4,23 @@ import React from 'react';
 import { Client } from './requester';
 import { Group } from './group';
 
+import './index.scss';
+
 
 interface Props {
     client: Client;
 }
 
 function Page(props: Props) {
+    const item = {
+        path: '/',
+        name: 'root',
+        isGroup: true,
+        attributes: {}
+    }
     return (
         <div>
-            <Group root="/" client={props.client} name="root" />
+            <Group item={item} client={props.client} />
         </div>
     );
 }

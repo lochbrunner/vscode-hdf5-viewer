@@ -16,7 +16,7 @@ content-type: application/json
 
 {
     "command": "attributes",
-    "key": "group/subgroup"
+    "key": "group"
 }
 
 

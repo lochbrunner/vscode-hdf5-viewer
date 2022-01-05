@@ -52,6 +52,7 @@ export interface Item {
     name: string;
     isGroup: boolean;
     path: string;
+    attributes: { [name: string]: string };
 }
 
 export class Client {
@@ -63,6 +64,12 @@ export class Client {
     list(key: string): Promise<Item[]> {
         return new Promise((resolve, reject) => {
             this.requester('list', { key }, resolve)
+        });
+    }
+
+    attributes(key: string): Promise<{ [name: string]: string }> {
+        return new Promise((resolve, reject) => {
+            this.requester('attributes', { key }, resolve)
         });
     }
 }

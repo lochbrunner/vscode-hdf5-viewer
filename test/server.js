@@ -8,7 +8,7 @@ const hdf5 = require('jsfive');
 const index_html_template = readFileSync('dist/client/index.html', 'utf8');
 
 const html = Mustache.render(index_html_template, {
-    resourcePrefix: 'assets/'
+    resourcePrefix: 'assets'
 });
 
 
@@ -30,12 +30,15 @@ app.get('/', (req, res) => {
 
 function list(object) {
     const items = object.keys.map(name => {
-        const isGroup = typeof object.get(name).keys !== 'function';
-        const path = object.get(name).name;
+        const item = object.get(name);
+        const isGroup = typeof item.keys !== 'function';
+        const path = item.name;
+        const attributes = item.attrs;
         return ({
             name,
             isGroup,
-            path
+            path,
+            attributes
         });
     });
     return JSON.stringify(items);

@@ -1,3 +1,6 @@
+[![Licence](https://img.shields.io/github/license/lochbrunner/vscode-hdf5-viewer.svg)](https://github.com/lochbrunner/vscode-hdf5-viewer)
+[![VS Code Marketplace](https://vsmarketplacebadge.apphb.com/version-short/lochbrunner.vscode-hdf5-viewer.svg) ![Rating](https://vsmarketplacebadge.apphb.com/rating-short/lochbrunner.vscode-hdf5-viewer.svg) ![Downloads](https://vsmarketplacebadge.apphb.com/downloads-short/lochbrunner.vscode-hdf5-viewer.svg) ![Installs](https://vsmarketplacebadge.apphb.com/installs-short/lochbrunner.vscode-hdf5-viewer.svg)](https://marketplace.visualstudio.com/items?itemName=lochbrunner.vscode-hdf5-viewer)
+
 # HDF5 Viewer Extension for VS-Code
 
 ## Usage
@@ -11,7 +14,6 @@ Right click on the file and click on `Hdf5 Viewer` to display the file.
 
 ```bash
 yarn build-client
-corejs/build-in-docker.sh
 yarn build-extension
 vsce package
 ```

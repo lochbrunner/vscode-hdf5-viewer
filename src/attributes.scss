@@ -1,0 +1,15 @@
+.attributes {
+    display: inline-block;
+    position: absolute;
+    left: max(30%, 150px);
+
+    > span {
+        position: relative;
+        background-color: rgba($color: #777, $alpha: 0.02);
+        border: solid 1px rgba($color: #777, $alpha: 0.1);
+        border-radius: 5px;
+        margin: 0 3px 0;
+        padding: 0 4px;
+        font-size: 90%;
+    }
+}

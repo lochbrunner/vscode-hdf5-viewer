@@ -3,15 +3,16 @@ import React, { useState } from 'react';
 
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import DataArrayIcon from '@mui/icons-material/DataArray';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
+import { Attributes } from './attributes';
 
-import './group.scss'
+import './group.scss';
+import { Dataset } from './dataset';
+
 
 export interface Props {
     client: Client;
-    root: string;
-    name: string;
+    item: Item;
 }
 
 export function Group(props: Props) {
@@ -19,7 +20,7 @@ export function Group(props: Props) {
     const [isLoading, startLoading] = useState<boolean>(false);
     const [isCollapsed, collapse] = useState<boolean>(false);
     const load = () => {
-        props.client.list(props.root).then(d => { startLoading(false); changeItems(d); });
+        props.client.list(props.item.path).then(d => { startLoading(false); changeItems(d); });
         startLoading(true);
     }
     if (!items) {
@@ -27,7 +28,8 @@ export function Group(props: Props) {
             return (
                 <div className="group">
                     <AutorenewIcon />
-                    <span>{props.name}</span>
+                    <span>{props.item.name}</span>
+                    <Attributes attributes={props.item.attributes} />
                 </div>
             );
         }
@@ -35,7 +37,8 @@ export function Group(props: Props) {
             return (
                 <div className="group">
                     <KeyboardArrowRightIcon onClick={load} className="load-button" />
-                    <span>{props.name}</span>
+                    <span>{props.item.name}</span>
+                    <Attributes attributes={props.item.attributes} />
                 </div>
             );
         }
@@ -45,14 +48,13 @@ export function Group(props: Props) {
             if (data.isGroup) {
                 return (
                     <li key={i}>
-                        <Group client={props.client} root={data.path} name={data.name} />
+                        <Group client={props.client} item={data} />
                     </li>
                 );
             } else {
                 return (
                     <li className="dataset" key={i}>
-                        <DataArrayIcon />
-                        <span>{data.name}</span>
+                        <Dataset client={props.client} item={data} />
                     </li>
                 );
             }
@@ -61,14 +63,16 @@ export function Group(props: Props) {
             return (
                 <div className="group">
                     <KeyboardArrowRightIcon className="open-button" onClick={() => collapse(false)} />
-                    <span> {props.name}</span>
+                    <span> {props.item.name}</span>
+                    <Attributes attributes={props.item.attributes} />
                 </div>
             );
         } else {
             return (
                 <div className="group">
                     <KeyboardArrowDownIcon className="collapse-button" onClick={() => collapse(true)} />
-                    <span>{props.name}</span>
+                    <span>{props.item.name}</span>
+                    <Attributes attributes={props.item.attributes} />
                     <ul >
                         {tree}
                     </ul>

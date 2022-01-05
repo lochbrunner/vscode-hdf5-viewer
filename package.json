@@ -1,6 +1,7 @@
 {
     "name": "vscode-hdf5-viewer",
-    "version": "0.0.1",
+    "displayName": "HDF5 Preview",
+    "version": "0.0.2",
     "engines": {
         "vscode": "^1.63.1"
     },
@@ -40,7 +41,22 @@
         },
         "configuration": {
             "title": "Hdf5 Viewer"
-        }
+        },
+        "customEditors": [
+            {
+                "viewType": "linuxBinaryPreview.preview",
+                "displayName": "Linux Binary Preview",
+                "selector": [
+                    {
+                        "filenamePattern": "*.hdf"
+                    },
+                    {
+                        "filenamePattern": "*.hdf5"
+                    }
+                ],
+                "priority": "default"
+            }
+        ]
     },
     "devDependencies": {
         "@babel/core": "^7.16.7",
