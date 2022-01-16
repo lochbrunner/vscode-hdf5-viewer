@@ -1,15 +1,16 @@
 {
-    "name": "vscode-hdf5-viewer",
+    "name": "vscode-hdf5-viewer-highfive",
     "displayName": "HDF5 Preview",
     "version": "0.0.3",
     "engines": {
         "vscode": "^1.63.1"
     },
-    "description": "Displays HDF5 files in VS code",
+    "description": "Displays HDF5 files in VS code (using highfive)",
     "scripts": {
         "build-client": "rm -f dist/client/* && webpack --config ./webpack.config.client.js --mode=production",
         "start": "webpack-dev-server --config ./webpack.config.client.js --mode=development --hot --progress --color --port 3003",
-        "build-extension": "rm -f dist/extension/* && webpack --devtool nosources-source-map --config ./node-extension.webpack.config.js"
+        "build-extension": "rm -f dist/extension/* && webpack --devtool nosources-source-map --config ./node-extension.webpack.config.js",
+        "build-gyp": "node-gyp build"
     },
     "keywords": [
         "hdf5",

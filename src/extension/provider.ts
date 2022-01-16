@@ -1,57 +1,38 @@
 
 import * as vscode from 'vscode';
-import { readFile } from 'fs';
+// import { readFile } from 'fs';
 import * as path from 'path';
 import Mustache from 'mustache';
+const highfive = require('../../build/Release/highfive.node')
 
-declare class Hdf5File {
+declare class Hdf5Handler {
     constructor(filename: string);
-    get(key: string): any;
+    list(key: string): any;
 }
 
-const hdf5 = require('jsfive');
-
-function list(object: any) {
-    const items = object.keys.map((name: string) => {
-        const item = object.get(name);
-        const isGroup = typeof item.keys !== 'function';
-        return ({
-            name,
-            isGroup,
-            path: item.name,
-            attributes: item.attrs
-        });
-    });
-    return items;
-}
 
 export class Hdf5Document implements vscode.CustomDocument {
     static async create(uri: vscode.Uri, openContext: vscode.CustomDocumentOpenContext): Promise<Hdf5Document | PromiseLike<Hdf5Document>> {
         return new Promise((resolve, reject) => {
             console.debug(`Loading file ${uri.fsPath}...`);
-            readFile(uri.fsPath, (err, data) => {
-                if (err) {
-                    console.error(err);
-                    reject(err);
-                }
-                const file = new hdf5.File(data.buffer) as Hdf5File;
-                resolve(new Hdf5Document(uri, file));
-            });
+            const handler = new highfive.HighFiveHandler(uri.fsPath);
+
+            resolve(new Hdf5Document(uri, handler));
         });
     }
 
     private readonly uri_: vscode.Uri;
-    private readonly file_: Hdf5File;
+    private readonly handler_: Hdf5Handler;
 
     private constructor(
         uri: vscode.Uri,
-        file: Hdf5File,
+        handler: Hdf5Handler,
     ) {
         this.uri_ = uri;
-        this.file_ = file;
+        this.handler_ = handler;
     }
     public get uri(): vscode.Uri { return this.uri_; }
-    public get file(): Hdf5File { return this.file_; }
+    public get handler(): Hdf5Handler { return this.handler_; }
     dispose(): void { }
 }
 
@@ -76,13 +57,13 @@ export class Hdf5ContentProvider implements vscode.CustomReadonlyEditorProvider<
         _token?: vscode.CancellationToken
     ): Promise<void> {
         webviewPanel.webview.onDidReceiveMessage(message => {
-            const object = document.file.get(message.key);
             console.debug(`received ${message}`);
             switch (message.command) {
                 case 'list':
+                    const response = document.handler.list(message.key);
                     webviewPanel.webview.postMessage({
                         command: 'list',
-                        data: list(object)
+                        data: response
                     });
                     break;
             }

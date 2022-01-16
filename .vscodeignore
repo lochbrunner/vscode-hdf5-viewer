@@ -1,6 +1,10 @@
 .vscode/**
 docs/**
 assets/**
+build/**
+json/**
+highfive/**
+highfive_node/**
 src/**
 test/**
 test_data/**
@@ -12,3 +16,4 @@ node_modules/**
 **/*.map
 **/*.d.ts
 tsconfig.json
+.gitmodules

@@ -1,14 +1,15 @@
-import { Client, Item } from './requester';
+import { Client, DatasetItem } from './requester';
 import React from 'react';
 
 import DataArrayIcon from '@mui/icons-material/DataArray';
 
 import './dataset.scss';
 import { Attributes } from './attributes';
+import { Dimensions } from './dimensions';
 
 export interface Props {
     client: Client;
-    item: Item;
+    item: DatasetItem;
 }
 
 
@@ -18,6 +19,7 @@ export function Dataset(props: Props) {
             <DataArrayIcon />
             <span>{props.item.name}</span>
             <Attributes attributes={props.item.attributes} />
+            <Dimensions dimensions={props.item.dimensions} />
         </div>
     );
 }

@@ -3,3 +3,4 @@ dist/**
 test_data/**
 *.vsix
 *.log
+build/**

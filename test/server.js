@@ -3,7 +3,8 @@ const Mustache = require('mustache');
 const { readFileSync, readFile } = require('fs');
 const morgan = require('morgan');
 const yargs = require('yargs');
-const hdf5 = require('jsfive');
+
+const highfive = require('../build/Release/highfive.node')
 
 const index_html_template = readFileSync('dist/client/index.html', 'utf8');
 
@@ -28,41 +29,18 @@ app.get('/', (req, res) => {
     res.send(html)
 });
 
-function list(object) {
-    const items = object.keys.map(name => {
-        const item = object.get(name);
-        const isGroup = typeof item.keys !== 'function';
-        const path = item.name;
-        const attributes = item.attrs;
-        return ({
-            name,
-            isGroup,
-            path,
-            attributes
-        });
-    });
-    return JSON.stringify(items);
-}
 
-readFile(argv.filename, (err, data) => {
-    if (err) {
-        console.error(err);
-        return;
+const file = new highfive.HighFiveHandler(argv.filename);
+app.post('/api', (req, res) => {
+    const name = req.body.key;
+    if (req.body.command === 'list') {
+        res.send(file.list(name));
+    } else {
+        res.send(JSON.stringify({ 'error': 'Unknown command: ' + res.body.commands }));
     }
-    const file = new hdf5.File(data.buffer);
-    app.post('/api', (req, res) => {
-        const object = file.get(req.body.key);
-        if (req.body.command === 'attributes') {
-            res.send(JSON.stringify(object.attrs));
-        } else if (req.body.command === 'list') {
-            res.send(list(object));
-        } else if (req.body.command === 'name') {
-            res.send(JSON.stringify(object.name));
-        }
-    });
+});
 
-    app.listen(argv.port, () => {
-        console.log(`Listening on http://localhost:${argv.port}`)
-    });
+app.listen(argv.port, () => {
+    console.log(`Listening on http://localhost:${argv.port}`)
 });
 

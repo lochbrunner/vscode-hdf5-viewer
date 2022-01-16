@@ -1,4 +1,4 @@
-import { Client, Item } from './requester';
+import { Client, GroupItem, Item } from './requester';
 import React, { useState } from 'react';
 
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -12,7 +12,7 @@ import { Dataset } from './dataset';
 
 export interface Props {
     client: Client;
-    item: Item;
+    item: GroupItem;
 }
 
 export function Group(props: Props) {
@@ -45,18 +45,22 @@ export function Group(props: Props) {
     }
     else {
         const tree = items.map((data, i) => {
-            if (data.isGroup) {
+            if (data.type == 'group') {
                 return (
                     <li key={i}>
                         <Group client={props.client} item={data} />
                     </li>
                 );
-            } else {
+            } else if (data.type === 'dataset') {
                 return (
                     <li className="dataset" key={i}>
                         <Dataset client={props.client} item={data} />
                     </li>
                 );
+            } else {
+                return <li>
+                    Unknown type {data.type}
+                </li>
             }
         });
         if (isCollapsed) {

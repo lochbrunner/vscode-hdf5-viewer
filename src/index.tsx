@@ -1,7 +1,7 @@
 const ReactDOM = require('react-dom');
 import React from 'react';
 
-import { Client } from './requester';
+import { Client, GroupItem } from './requester';
 import { Group } from './group';
 
 import './index.scss';
@@ -12,10 +12,10 @@ interface Props {
 }
 
 function Page(props: Props) {
-    const item = {
+    const item: GroupItem = {
         path: '/',
         name: 'root',
-        isGroup: true,
+        type: 'group',
         attributes: {}
     }
     return (

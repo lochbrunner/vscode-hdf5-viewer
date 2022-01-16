@@ -48,12 +48,26 @@ export function create_requester() {
     }
 }
 
-export interface Item {
+export interface BaseItem {
     name: string;
-    isGroup: boolean;
     path: string;
     attributes: { [name: string]: string };
 }
+
+export interface DatasetItem extends BaseItem {
+    type: 'dataset';
+    dimensions: number[];
+}
+
+export interface GroupItem extends BaseItem {
+    type: 'group';
+}
+
+export interface UnknownItem extends BaseItem {
+    type: 'unknown';
+}
+
+export type Item = DatasetItem | GroupItem | UnknownItem;
 
 export class Client {
     requester: any;
