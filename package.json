@@ -53,6 +53,9 @@
                     },
                     {
                         "filenamePattern": "*.hdf5"
+                    },
+                    {
+                        "filenamePattern": "*.h5"
                     }
                 ],
                 "priority": "default"
